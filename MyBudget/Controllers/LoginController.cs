@@ -1,6 +1,7 @@
 using Application.Dto;
 using Application.Interfaces;
 using Application.Requests;
+using Controller.Middleware;
 using Domain.Core.Interfaces.Services;
 using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -23,10 +24,10 @@ namespace MyBudget.Controllers
         }
 
         [HttpPost(Name = "Login")]
-        public async Task<ActionResult<string>> Post([FromBody] LoginRequest req)
+        public async Task<RequestResult> Post([FromBody] LoginRequest req)
         {
             _logger.LogInformation($"Authenticating user {req.Email}");
-            return Ok(await _application.Authenticate(req));
+            return new RequestResult(await _application.Authenticate(req));
         }
     }
 }

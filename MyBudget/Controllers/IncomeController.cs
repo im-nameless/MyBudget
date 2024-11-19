@@ -1,4 +1,5 @@
 using Application.Interfaces;
+using Controller.Middleware;
 using Domain.Core.Interfaces.Services;
 using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -21,10 +22,10 @@ namespace MyBudget.Controllers
 
         [HttpPost]
         [Route("")]
-        public async Task<ActionResult<Guid>> Post([FromBody] Income income)
+        public async Task<RequestResult> Post([FromBody] Income income)
         {
             _logger.LogInformation("Creating a new income");
-            return Ok(await _application.AddAsync(income));
+            return new RequestResult(await _application.AddAsync(income));
         }
 
         [HttpGet(Name = "Income")]

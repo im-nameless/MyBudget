@@ -13,6 +13,16 @@ ConfigurationIoC.LoadMapper(builder.Services);
 ConfigurationIoC.LoadSwagger(builder.Services);
 ConfigurationIoC.AddAuthentication(builder.Services, builder.Configuration);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("cors_policy", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .WithMethods("POST", "GET", "OPTIONS", "PUT", "PATCH", "DELETE")
+               .AllowAnyHeader();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -21,6 +31,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("cors_policy");
+
 
 app.UseHttpsRedirection();
 app.UseAuthentication();

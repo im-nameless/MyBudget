@@ -31,10 +31,10 @@ public class ApplicationServiceLogin : IApplicationServiceLogin
             throw new Exception("Invalid email or password");
         }
 
-        return await GenerateToken(user);
+        return await GenerateToken(user, req);
     }
 
-    private async Task<string> GenerateToken(User user)
+    private async Task<string> GenerateToken(User user, LoginRequest req)
     {
         var claims = new List<Claim>
         {
@@ -49,7 +49,7 @@ public class ApplicationServiceLogin : IApplicationServiceLogin
             issuer: _jwtSettings.Issuer,
             audience: _jwtSettings.Audience,
             claims: claims,
-            expires: DateTime.UtcNow.AddHours(_jwtSettings.Expiration),
+            expires: DateTime.UtcNow.AddHours(req.RememberMe ? 24 * 365 : _jwtSettings.Expiration),
             signingCredentials: credentials
         );
 

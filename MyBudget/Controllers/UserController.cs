@@ -1,5 +1,6 @@
 using Application.Dto;
 using Application.Interfaces;
+using Controller.Middleware;
 using Domain.Core.Interfaces.Services;
 using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -22,11 +23,11 @@ namespace MyBudget.Controllers
         }
 
         [HttpPost(Name = "User")]
-        public async Task<ActionResult<Guid>> Post([FromBody] User user)
+        public async Task<RequestResult> Post([FromBody] User user)
         {
             _logger.LogInformation("Creating a new user");
             user.Password = HashPassword(user.Password);
-            return Ok(await _application.AddAsync(user));
+            return new RequestResult(await _application.AddAsync(user));
         }
 
         [Authorize]
@@ -42,11 +43,11 @@ namespace MyBudget.Controllers
         [Authorize]
         [HttpGet]
         [Route("{id}")]
-        public async Task<ActionResult<UserDto>> Get([FromRoute] Guid id)
+        public async Task<RequestResult> Get([FromRoute] Guid id)
         {
             _logger.LogInformation("Getting all users");
             var response = await _application.GetAsync(id);
-            return Ok(response);
+            return new RequestResult(response);
         }
     }
 }
