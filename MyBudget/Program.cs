@@ -1,4 +1,5 @@
 using MyBudget.IoC;
+using Npgsql;
 
 var builder = WebApplication.CreateBuilder(args);
 

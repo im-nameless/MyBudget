@@ -32,11 +32,11 @@ public class HandlerExceptionMiddleware
             response.ContentType = "application/json; charset=utf-8";
             response.StatusCode = e switch
             {
-                FestpayForbiddenException => (int)HttpStatusCode.Forbidden,
-                FestpayUnauthorizedException => (int)HttpStatusCode.Unauthorized,
-                FestpayNotFoundException => (int)HttpStatusCode.NotFound,
-                FestpayBadRequestException => (int)HttpStatusCode.BadRequest,
-                FestpayException => (int)HttpStatusCode.BadGateway,
+                BudgetForbiddenException => (int)HttpStatusCode.Forbidden,
+                BudgetUnauthorizedException => (int)HttpStatusCode.Unauthorized,
+                BudgetNotFoundException => (int)HttpStatusCode.NotFound,
+                BudgetBadRequestException => (int)HttpStatusCode.BadRequest,
+                BudgetException => (int)HttpStatusCode.BadGateway,
                 HttpRequestException => (int)HttpStatusCode.BadGateway,
                 _ => (int)HttpStatusCode.InternalServerError
             };

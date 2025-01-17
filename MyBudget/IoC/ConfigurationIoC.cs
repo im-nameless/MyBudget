@@ -17,6 +17,7 @@ using System.Text;
 using Domain.Auth;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Microsoft.OpenApi.Models;
+using Npgsql;
 
 namespace MyBudget.IoC;
 
@@ -35,14 +36,16 @@ public static class ConfigurationIoC
         services.AddScoped<IApplicationServiceLogin, ApplicationServiceLogin>();
         services.AddScoped<IApplicationServiceIncome, ApplicationServiceIncome>();
         services.AddScoped<IApplicationServiceExpense, ApplicationServiceExpense>();
+        services.AddScoped<IApplicationServiceUser, ApplicationServiceUser>();
     }
 
     public static void LoadDatabase(IServiceCollection services, IConfiguration config)
     {
+        var connection = config.GetConnectionString("DefaultConnection");
         services.AddDbContext<MyBudgetContext>(options =>
         {
             var connection = config.GetConnectionString("DefaultConnection") ?? throw new Exception("DefaultConnection not found 2");
-            options.UseSqlServer(connection)
+            options.UseNpgsql(connection)
                    .EnableSensitiveDataLogging()
                    .EnableDetailedErrors();
         });

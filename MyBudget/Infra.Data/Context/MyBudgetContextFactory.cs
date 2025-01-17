@@ -1,6 +1,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Npgsql;
 
 namespace MyBudget.Infra.Data.Context;
 
@@ -14,9 +15,9 @@ public class MyBudgetContextFactory : IDesignTimeDbContextFactory<MyBudgetContex
 
     public MyBudgetContext CreateDbContext(string[] args)
     {
-        var connection = Environment.GetEnvironmentVariable("DefaultConnection") ?? "Server=.\\SQLExpress01;Database=MyBudgetDb;Trusted_Connection=true;TrustServerCertificate=true";
+        var connection = Environment.GetEnvironmentVariable("DefaultConnection") ?? "Server=postgresql://postgres:rdTx5GQW73XOYMIK@chivalrously-intent-squirrel.data-1.use1.tembo.io:5432/postgres?sslmode=verify-full&sslrootcert=ca.crt;TrustServerCertificate=true";
         var optionsBuilder = new DbContextOptionsBuilder<MyBudgetContext>();
-        optionsBuilder.UseSqlServer(connection)
+        optionsBuilder.UseNpgsql(connection)
                       .EnableSensitiveDataLogging()
                       .EnableDetailedErrors();
 

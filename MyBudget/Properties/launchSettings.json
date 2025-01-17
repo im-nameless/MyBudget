@@ -6,7 +6,7 @@
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "DefaultConnection": "Server=.\\SQLExpress01;Database=MyBudgetDb;Trusted_Connection=true;TrustServerCertificate=true"
+        "DefaultConnection": "Host=chivalrously-intent-squirrel.data-1.use1.tembo.io;Port=5432;Username=postgres;Password=rdTx5GQW73XOYMIK;Database=postgres"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "http://localhost:5248"
@@ -17,7 +17,7 @@
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "DefaultConnection": "Server=.\\SQLExpress01;Database=MyBudgetDb;Trusted_Connection=true;TrustServerCertificate=true"
+        "DefaultConnection": "Host=chivalrously-intent-squirrel.data-1.use1.tembo.io;Port=5432;Username=postgres;Password=rdTx5GQW73XOYMIK;Database=postgres"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "https://localhost:7225;http://localhost:5248"
@@ -28,7 +28,7 @@
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "DefaultConnection": "Server=.\\SQLExpress01;Database=MyBudgetDb;Trusted_Connection=true;TrustServerCertificate=true"
+        "DefaultConnection": "Server=.\\SQLExpress01;Database=postgres;Trusted_Connection=true;TrustServerCertificate=true"
       }
     },
     "Container (Dockerfile)": {
@@ -38,7 +38,7 @@
       "environmentVariables": {
         "ASPNETCORE_HTTPS_PORTS": "8081",
         "ASPNETCORE_HTTP_PORTS": "8080",
-        "DefaultConnection": "Server=.\\SQLExpress01;Database=MyBudgetDb;Trusted_Connection=true;TrustServerCertificate=true"
+        "DefaultConnection": "Host=chivalrously-intent-squirrel.data-1.use1.tembo.io;Port=5432;Username=postgres;Password=rdTx5GQW73XOYMIK;Database=postgres"
       },
       "publishAllPorts": true,
       "useSSL": true
@@ -53,7 +53,7 @@
       "sslPort": 44314
     },
     "environmentVariables": {
-      "DefaultConnection": "Server=.\\SQLExpress01;Database=MyBudgetDb;Trusted_Connection=true;TrustServerCertificate=true"
+      "DefaultConnection": "Host=chivalrously-intent-squirrel.data-1.use1.tembo.io;Port=5432;Username=postgres;Password=rdTx5GQW73XOYMIK;Database=postgres"
     }
   }
 }

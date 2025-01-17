@@ -2,23 +2,23 @@ using Domain.Constants;
 
 namespace Domain.Exceptions;
 
-public class FestpayException : Exception
+public class BudgetException : Exception
 {
-    public FestpayException(string message) : base(message) { }
+    public BudgetException(string message) : base(message) { }
 }
-public class FestpayUnauthorizedException : FestpayException
+public class BudgetUnauthorizedException : BudgetException
 {
-    public FestpayUnauthorizedException() : base(Messages.UNAUTHORIZED) { }
+    public BudgetUnauthorizedException() : base(Messages.UNAUTHORIZED) { }
 }
-public class FestpayNotFoundException : FestpayException
+public class BudgetNotFoundException : BudgetException
 {
-    public FestpayNotFoundException() : base(Messages.NOT_FOUND) { }
+    public BudgetNotFoundException() : base(Messages.NOT_FOUND) { }
 }
-public class FestpayForbiddenException : FestpayException
+public class BudgetForbiddenException : BudgetException
 {
-    public FestpayForbiddenException() : base(Messages.FORBIDDEN) { }
+    public BudgetForbiddenException() : base(Messages.FORBIDDEN) { }
 }
-public class FestpayBadRequestException : FestpayException
+public class BudgetBadRequestException : BudgetException
 {
-    public FestpayBadRequestException() : base(Messages.BAD_REQUEST) { }
+    public BudgetBadRequestException() : base(Messages.BAD_REQUEST) { }
 }

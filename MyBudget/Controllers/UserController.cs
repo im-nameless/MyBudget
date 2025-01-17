@@ -14,40 +14,19 @@ namespace MyBudget.Controllers
     public class UserController : ControllerBase
     {
         private readonly ILogger<UserController> _logger;
-        private readonly IApplicationServiceBase<UserDto, User> _application;
+        private readonly IApplicationServiceUser _application;
 
-        public UserController(ILogger<UserController> logger, IApplicationServiceBase<UserDto, User> application)
+        public UserController(ILogger<UserController> logger, IApplicationServiceUser application)
         {
             _logger = logger;
             _application = application;
         }
 
         [HttpPost(Name = "User")]
-        public async Task<RequestResult> Post([FromBody] User user)
+        public async Task<RequestResult> Post([FromBody] UserDto user)
         {
             _logger.LogInformation("Creating a new user");
-            user.Password = HashPassword(user.Password);
-            return new RequestResult(await _application.AddAsync(user));
-        }
-
-        [Authorize]
-        [HttpGet]
-        [Route("")]
-        public async Task<ActionResult<IList<UserDto>>> GetAll()
-        {
-            _logger.LogInformation("Getting all users");
-            var response = await _application.GetAsync(true);
-            return Ok(response);
-        }
-
-        [Authorize]
-        [HttpGet]
-        [Route("{id}")]
-        public async Task<RequestResult> Get([FromRoute] Guid id)
-        {
-            _logger.LogInformation("Getting all users");
-            var response = await _application.GetAsync(id);
-            return new RequestResult(response);
+            return new RequestResult(await _application.Register(user));
         }
     }
 }
