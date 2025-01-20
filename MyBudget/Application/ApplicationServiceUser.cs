@@ -28,31 +28,41 @@ public class ApplicationServiceUser : IApplicationServiceUser
 
     public async Task<bool> Register(UserDto req)
     {
-        var user = await _service.GetAsync(x => x.Email == req.Email);
-
-        if (user!.Any())
+        try
         {
-            throw new BudgetException("Usuário já cadastrado");
-        }
+            var user = await _service.GetAsync(x => x.Email == req.Email);
 
-        if(string.IsNullOrEmpty(req.Name) || string.IsNullOrEmpty(req.Email) || string.IsNullOrEmpty(req.Password) || 
-            string.IsNullOrEmpty(req.Phone) || req.Birthdate == DateTime.MinValue)
+            if (user!.Any())
+            {
+                throw new BudgetException("Usuário já cadastrado");
+            }
+
+            if (string.IsNullOrEmpty(req.Name) || string.IsNullOrEmpty(req.Email) || string.IsNullOrEmpty(req.Password) ||
+                string.IsNullOrEmpty(req.Phone) || req.Birthdate == DateTime.MinValue)
+            {
+                throw new BudgetException("Nome, email e senha são obrigatórios.");
+            }
+
+            if (!ValidatePassword(req.Password))
+            {
+                throw new BudgetException("Senha deve conter ao menos 8 caracteres, uma letra maiúscula, uma letra minúscula, um número e um caractere especial.");
+            }
+
+            req.Password = HashPassword(req.Password);
+            req.Name = req.Name.RemoveMultipleWhiteSpaces();
+            req.Email = req.Email.RemoveWhiteSpaces();
+            req.Phone = req.Phone.RemoveMultipleWhiteSpaces().RemoveSpecialCharacters();
+            req.Birthdate = req.Birthdate.SetKindUtc();
+            
+            var model = _mapper.Map<UserDto, User>(req);
+            model.CreatedAt = model.CreatedAt.SetKindUtc();
+
+            return await _service.AddAsync(model) != Guid.Empty;
+        }
+        catch (Exception e)
         {
-            throw new BudgetException("Nome, email e senha são obrigatórios.");
+            throw new BudgetException(e.Message);
         }
-
-        if (!ValidatePassword(req.Password))
-        {
-            throw new BudgetException("Senha deve conter ao menos 8 caracteres, uma letra maiúscula, uma letra minúscula, um número e um caractere especial.");
-        }
-
-        req.Password = HashPassword(req.Password);
-        req.Name = req.Name.RemoveMultipleWhiteSpaces();
-        req.Email = req.Email.RemoveWhiteSpaces();
-        req.Phone = req.Phone.RemoveMultipleWhiteSpaces().RemoveSpecialCharacters();
-        var model = _mapper.Map<UserDto, User>(req); 
-
-        return await _service.AddAsync(model) != Guid.Empty;
     }
         
     private bool ValidatePassword(string password)
