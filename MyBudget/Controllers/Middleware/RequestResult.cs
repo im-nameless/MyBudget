@@ -11,8 +11,16 @@ public class RequestResult : IActionResult
 
     public RequestResult() { }
 
-    public RequestResult(object? data, string? message = null)
+    public RequestResult(object? data, string? message = null, bool? success = true)
     {
+        if (success != null && success == false)
+        {
+            _result = new ResponseApi(false, message, null);
+            _statusCode = HttpStatusCode.BadRequest;
+
+            return;
+        }
+
         if (data?.GetType() == typeof(ResultApi))
         {
             var r = (ResultApi)data;

@@ -6,7 +6,7 @@
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "DefaultConnection": "Host=chivalrously-intent-squirrel.data-1.use1.tembo.io;Port=5432;Username=postgres;Password=rdTx5GQW73XOYMIK;Database=postgres"
+        "DefaultConnection": "Host=ep-orange-rice-acmvuqcf-pooler.sa-east-1.aws.neon.tech;Database=neondb;Username=neondb_owner;Password=npg_auldYiVjo28f;Ssl Mode=Require;Trust Server Certificate=true"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "http://localhost:5248"
@@ -17,7 +17,7 @@
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "DefaultConnection": "Host=chivalrously-intent-squirrel.data-1.use1.tembo.io;Port=5432;Username=postgres;Password=rdTx5GQW73XOYMIK;Database=postgres"
+        "DefaultConnection": "Host=ep-orange-rice-acmvuqcf-pooler.sa-east-1.aws.neon.tech;Database=neondb;Username=neondb_owner;Password=npg_auldYiVjo28f;Ssl Mode=Require;Trust Server Certificate=true"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "https://localhost:7225;http://localhost:5248"
@@ -28,7 +28,7 @@
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "DefaultConnection": "Server=.\\SQLExpress01;Database=postgres;Trusted_Connection=true;TrustServerCertificate=true"
+        "DefaultConnection": "Host=ep-orange-rice-acmvuqcf-pooler.sa-east-1.aws.neon.tech;Database=neondb;Username=neondb_owner;Password=npg_auldYiVjo28f;Ssl Mode=Require;Trust Server Certificate=true"
       }
     },
     "Container (Dockerfile)": {
@@ -38,7 +38,7 @@
       "environmentVariables": {
         "ASPNETCORE_HTTPS_PORTS": "8081",
         "ASPNETCORE_HTTP_PORTS": "8080",
-        "DefaultConnection": "Host=chivalrously-intent-squirrel.data-1.use1.tembo.io;Port=5432;Username=postgres;Password=rdTx5GQW73XOYMIK;Database=postgres"
+        "DefaultConnection": "Host=ep-orange-rice-acmvuqcf-pooler.sa-east-1.aws.neon.tech;Database=neondb;Username=neondb_owner;Password=npg_auldYiVjo28f;Ssl Mode=Require;Trust Server Certificate=true"
       },
       "publishAllPorts": true,
       "useSSL": true

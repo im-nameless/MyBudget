@@ -26,8 +26,15 @@ namespace MyBudget.Controllers
         [HttpPost(Name = "Login")]
         public async Task<RequestResult> Post([FromBody] LoginRequest req)
         {
-            _logger.LogInformation($"Authenticating user {req.Email}");
-            return new RequestResult(await _application.Authenticate(req));
+            try
+            {
+                _logger.LogInformation($"Authenticating user {req.Email}");
+                return new RequestResult(await _application.Authenticate(req));
+            }
+            catch (Exception e)
+            {
+                return new RequestResult(false, e.Message, false);
+            }
         }
     }
 }

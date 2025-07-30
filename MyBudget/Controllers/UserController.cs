@@ -25,8 +25,15 @@ namespace MyBudget.Controllers
         [HttpPost(Name = "User")]
         public async Task<RequestResult> Post([FromBody] UserDto user)
         {
-            _logger.LogInformation("Creating a new user");
-            return new RequestResult(await _application.Register(user));
+            try
+            {
+                _logger.LogInformation("Creating a new user");
+                return new RequestResult(await _application.Register(user));
+            }
+            catch(Exception e)
+            {
+                return new RequestResult(false, e.Message, false);
+            }
         }
     }
 }
